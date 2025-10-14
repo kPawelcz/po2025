@@ -27,27 +27,25 @@ public class Lotto2_Trafienie {
         while (zmienna){
 
             podane_liczby = liczby;
-            for(int i=0; pokrywajace_liczby.size()<6 ; i++){
-                int probka2 = liczba.nextInt(1,49);
-                if(pokrywajace_liczby.contains(probka2)){
+            for(int i=0; pokrywajace_liczby.size()<6 ; i++) {
+                int probka2 = liczba.nextInt(1, 49);
+                if (pokrywajace_liczby.contains(probka2)) {
                     continue;
-                }
-                else{
+                } else {
                     pokrywajace_liczby.add(probka2);
                 }
-
-                pokrywajace_liczby.retainAll(podane_liczby);
-
-                if(pokrywajace_liczby.size() == 6){
+            }
+            pokrywajace_liczby.retainAll(podane_liczby);
+            if(pokrywajace_liczby.size() == 6){
                     licznik ++;
                     System.out.println("Brawo trafiles po: " + licznik + " probach");
                     zmienna = false;
-                }
-                else{
-                    licznik++;
+            }
+            else{
+                licznik++;
                 }
             }
-        }
+
         double end = System.currentTimeMillis();
         double czas = end - start;
         System.out.println("Czas wykonywania operacji: " + czas);
