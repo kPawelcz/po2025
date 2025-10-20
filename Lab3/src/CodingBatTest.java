@@ -36,4 +36,15 @@ public class CodingBatTest {
 
 
     }
+    @org.junit.Test
+    public void helloName(){
+        CodingBat cb = new CodingBat();
+        assertEquals("Hello Bob!", cb.helloName("Bob"));
+        assertEquals("Hello Alice!", cb.helloName("Alice"));
+        assertEquals("Hello X!", cb.helloName("X"));
+        assertEquals("Hello Dolly!", cb.helloName("Dolly"));
+        assertEquals("Hello Alpha!", cb.helloName("Alpha"));
+        assertEquals("Hello ho ho ho!", cb.helloName("ho ho ho"));
+
+    }
 }
