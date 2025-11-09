@@ -1,6 +1,7 @@
 package Symulator;
 
 public class Skrzynia_Biegów{
+
     private int aktualnyBieg;
     private int iloscBiegow = 6;
     private double aktualnePrzelozenie;
@@ -25,7 +26,18 @@ public class Skrzynia_Biegów{
     }
 
     void przelozenieAbieg(){
-
+        if(aktualnyBieg < 3){
+            aktualnePrzelozenie = 0.5;
+            System.out.println("Aktualne przełożenie jest niskie");
+        }
+        else if(aktualnyBieg > 4){
+            aktualnePrzelozenie = 8;
+            System.out.println("Aktualne przełożenie jest wysokie");
+        }
+        else{
+            aktualnePrzelozenie = 1;
+            System.out.println("Aktualne przełożenie jest średnie");
+        }
     }
 
     public int getAktualnyBieg() {

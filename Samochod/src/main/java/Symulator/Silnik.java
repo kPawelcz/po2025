@@ -1,6 +1,7 @@
 package Symulator;
 
 public class Silnik{
+
     private final int maxobroty = 10000;
     private int obroty;
 
