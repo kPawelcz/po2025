@@ -28,24 +28,24 @@ public class Samochód {
     Skrzynia_Biegów skrzynia = new Skrzynia_Biegów();
 
 
-    void wlacz(){
+    public void wlacz(){
         silnik.uruchom();
     }
 
-    void wylacz(){
+    public void wylacz(){
         silnik.zatrzymaj();
     }
 
-    void zwiekszBieg(){
+    public void zwiekszBieg(){
         skrzynia.zwiekszBieg();
     }
 
-    void zmniejszBieg(){
+    public void zmniejszBieg(){
         skrzynia.zmniejszBieg();
     }
 
     private double przelozenie;
-    void przelozenie(){
+    public void przelozenie(){
         skrzynia.przelozenieAbieg();
         przelozenie = skrzynia.getAktualnePrzelozenie();
         System.out.println("Wartość przełożenie to: " + przelozenie);

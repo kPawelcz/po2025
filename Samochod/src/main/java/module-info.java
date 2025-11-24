@@ -1,0 +1,3 @@
+module Samochod {
+    exports Symulator;
+}
