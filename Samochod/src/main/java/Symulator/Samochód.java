@@ -6,11 +6,13 @@ public class Samochód {
     public String nrRejestracji;
     private String model;
     public int predkość_max;
+    public int waga;
 
-    public Samochód(String model, String nrRejestracji, int predkość_max ){
+    public Samochód(String model, String nrRejestracji, int predkość_max, int waga ){
         this.model = model;
         this.nrRejestracji = nrRejestracji;
         this.predkość_max = predkość_max;
+        this.waga = waga;
 
 
         wlacz();
@@ -45,12 +47,27 @@ public class Samochód {
     }
 
     private double przelozenie;
+
     public void przelozenie(){
         skrzynia.przelozenieAbieg();
         przelozenie = skrzynia.getAktualnePrzelozenie();
         System.out.println("Wartość przełożenie to: " + przelozenie);
     }
 
+    public String getModel(){
+        return model;
+    }
 
+    public int getPredkość_max(){
+        return predkość_max;
+    }
+
+    public String getNrRejestracji(){
+        return nrRejestracji;
+    }
+    public int getWaga(){
+        return waga;
+    }
+    public int dajBieg() { return skrzynia.getAktualnyBieg(); }
 
 }
