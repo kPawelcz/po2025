@@ -91,3 +91,6 @@ Arkadiusz Baran, Maciek Miłek
 Roch Głogowski, Antoni Janek
 
 36) Inteligentna spiżarka: spis jedzenia i produktów w spiżarce, książka kucharska, sprawdzanie dostępnych przepisów na podstawie stanu spiżarki 
+
+37)System zarządzania przejazdami kolejowymi: kreowanie sieci kolejowej, zarządzanie przejazdami i pociągami, sprawdzanie statusów pociągu, obserwacja jego przejazdów, obsługa kolizji i opóźnień.
+Marcin Węgrzyn, Adam Jabłoński
