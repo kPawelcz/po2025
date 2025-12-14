@@ -13,10 +13,12 @@ Daniel Kędziora
 3) Inteligentne Skrzyżowanie: Symulacja ruchu drogowego z sygnalizacją świetlną adaptującą się do natężenia ruchu i pojazdów uprzywilejowanych.
 
 4) Automat Vendingowy: Symulator maszyny z napojami/przekąskami obsługujący stan magazynowy, płatności i wydawanie reszty.
+Eryk Knap, Michał Sałapat
 
 5)  System Zarządzania Parkingiem: Obsługa wjazdu/wyjazdu, naliczanie opłat, wykrywanie wolnych miejsc i abonamentów.
 
 6)  Ekosystem (Wirtualne ZOO): Symulacja interakcji między gatunkami zwierząt (drapieżnik/ofiara) w zamkniętym środowisku.
+Martyna Burghardt
 
 7)  Wieża Kontroli Lotów: Kolejkowanie startów i lądowań samolotów o różnych priorytetach i zużyciu paliwa.
 
@@ -46,7 +48,7 @@ Michał Firek, Maciej Babral
 Arkadiusz Kępa, Kamil Ciask
 
 19) System Kasowy (POS) w Sklepie: Skanowanie produktów, rabaty, różne metody płatności, drukowanie paragonów i zwroty.
-
+Kacper Taborski, Jakub Zyblikiewicz-Słowik
 20) Serwis Streamingowy (a'la Spotify): Zarządzanie użytkownikami, playlistami, biblioteką utworów i subskrypcjami.
 
 Kategoria C: Gry i Rozrywka (Najciekawsze na Diagramy Sekwencji)
@@ -63,6 +65,7 @@ Mateusz Maślanka, Piotr Kolenda
 25) Gra Strategiczna (Map Editor): Edytor mapy z różnymi typami terenu, jednostkami i budynkami (zapis/odczyt stanu).
 
 26) Quiz / Generator Egzaminów: Baza pytań różnych typów (jednokrotne, wielokrotne), losowanie zestawów i ocenianie wyników.
+    Natalia Mordarska,Grzegorz Łątka 
 
 27) Gra Planszowa (np. Monopoly uproszczone): Plansza, pionki, rzuty kostką, kupowanie pól i obsługa bankructwa.  
 
@@ -91,6 +94,9 @@ Arkadiusz Baran, Maciek Miłek
 Roch Głogowski, Antoni Janek
 
 36) Inteligentna spiżarka: spis jedzenia i produktów w spiżarce, książka kucharska, sprawdzanie dostępnych przepisów na podstawie stanu spiżarki 
-
+Karol Brodowicz, Krzysztof Dudzik
 37)System zarządzania przejazdami kolejowymi: kreowanie sieci kolejowej, zarządzanie przejazdami i pociągami, sprawdzanie statusów pociągu, obserwacja jego przejazdów, obsługa kolizji i opóźnień.
 Marcin Węgrzyn, Adam Jabłoński
+
+37) System do pomiarów natężenia ruchu rowerowego: VideoTagger + sporządzanie statystyk.
+Szymon Kumorek, Jakub Bogunia
