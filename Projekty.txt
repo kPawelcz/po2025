@@ -65,6 +65,7 @@ Mateusz Maślanka, Piotr Kolenda
 25) Gra Strategiczna (Map Editor): Edytor mapy z różnymi typami terenu, jednostkami i budynkami (zapis/odczyt stanu).
 
 26) Quiz / Generator Egzaminów: Baza pytań różnych typów (jednokrotne, wielokrotne), losowanie zestawów i ocenianie wyników.
+    Natalia Mordarska,Grzegorz Łątka 
 
 27) Gra Planszowa (np. Monopoly uproszczone): Plansza, pionki, rzuty kostką, kupowanie pól i obsługa bankructwa.  
 
