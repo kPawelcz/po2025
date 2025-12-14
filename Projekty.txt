@@ -18,6 +18,7 @@ Eryk Knap, Michał Sałapat
 5)  System Zarządzania Parkingiem: Obsługa wjazdu/wyjazdu, naliczanie opłat, wykrywanie wolnych miejsc i abonamentów.
 
 6)  Ekosystem (Wirtualne ZOO): Symulacja interakcji między gatunkami zwierząt (drapieżnik/ofiara) w zamkniętym środowisku.
+Martyna Burghardt
 
 7)  Wieża Kontroli Lotów: Kolejkowanie startów i lądowań samolotów o różnych priorytetach i zużyciu paliwa.
 
