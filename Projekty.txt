@@ -13,6 +13,7 @@ Daniel Kędziora
 3) Inteligentne Skrzyżowanie: Symulacja ruchu drogowego z sygnalizacją świetlną adaptującą się do natężenia ruchu i pojazdów uprzywilejowanych.
 
 4) Automat Vendingowy: Symulator maszyny z napojami/przekąskami obsługujący stan magazynowy, płatności i wydawanie reszty.
+Eryk Knap, Michał Sałapat
 
 5)  System Zarządzania Parkingiem: Obsługa wjazdu/wyjazdu, naliczanie opłat, wykrywanie wolnych miejsc i abonamentów.
 
