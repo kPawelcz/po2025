@@ -1,9 +1,18 @@
 package Symulator;
 
-public class Silnik{
+public class Silnik extends Komponent{
 
-    private final int maxobroty = 10000;
+    private int maxobroty;
     private int obroty;
+
+    public Silnik(String nazwa, int cena, int Waga, int maxobroty ){
+        super(nazwa,cena,Waga);
+        this.maxobroty = maxobroty;
+    };
+
+    public int getObroty() {
+        return obroty;
+    }
 
     void zwiekszObroty(int zwiekszenie){
         if(obroty < maxobroty){
@@ -42,4 +51,23 @@ public class Silnik{
     void zatrzymaj(){
         obroty = 0;
     }
+
+
+    @Override
+    public String getNazwa() {
+        return super.getNazwa();
+    }
+
+    @Override
+    public int getCena() {
+        return super.getCena();
+    }
+
+    @Override
+    public double getWaga() {
+        return super.getWaga();
+    }
+
+
 }
+

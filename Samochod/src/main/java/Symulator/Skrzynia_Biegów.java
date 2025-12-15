@@ -1,15 +1,25 @@
 package Symulator;
 
-public class Skrzynia_Biegów{
+public class Skrzynia_Biegów extends Komponent{
 
     private int aktualnyBieg;
-    private int iloscBiegow = 6;
-    private double aktualnePrzelozenie;
+    private int iloscBiegow;
+
+    public void setIloscBiegow(int iloscBiegow) {
+        this.iloscBiegow = iloscBiegow;
+    }
+
+
+    Sprzęgło sprzeglo = new Sprzęgło();
+    boolean stan_sprzegla = sprzeglo.isStanSprzegla();
 
 
     void zwiekszBieg(){
         if(aktualnyBieg < iloscBiegow){
-            aktualnyBieg += 1;
+            if(stan_sprzegla == true) {
+                aktualnyBieg += 1;
+                stan_sprzegla = false;
+            }
         }
         else{
             aktualnyBieg = iloscBiegow;
@@ -18,25 +28,13 @@ public class Skrzynia_Biegów{
 
     void zmniejszBieg(){
         if(aktualnyBieg>0){
-            aktualnyBieg -= 1;
+            if(stan_sprzegla == true) {
+                aktualnyBieg -= 1;
+                stan_sprzegla = false;
+            }
         }
         if(aktualnyBieg == 0){
             System.out.println("Jesteś na luzie");
-        }
-    }
-
-    void przelozenieAbieg(){
-        if(aktualnyBieg < 3){
-            aktualnePrzelozenie = 0.5;
-            System.out.println("Aktualne przełożenie jest niskie");
-        }
-        else if(aktualnyBieg > 4){
-            aktualnePrzelozenie = 8;
-            System.out.println("Aktualne przełożenie jest wysokie");
-        }
-        else{
-            aktualnePrzelozenie = 1;
-            System.out.println("Aktualne przełożenie jest średnie");
         }
     }
 
@@ -44,7 +42,22 @@ public class Skrzynia_Biegów{
         return aktualnyBieg;
     }
 
-    public double getAktualnePrzelozenie() {
-        return aktualnePrzelozenie;
+
+    @Override
+    public String getNazwa() {
+        return super.getNazwa();
     }
+
+    @Override
+    public double getWaga() {
+        return super.getWaga();
+    }
+
+    @Override
+    public int getCena() {
+        return super.getCena();
+    }
+
+
 }
+

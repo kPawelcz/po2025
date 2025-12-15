@@ -18,7 +18,7 @@ public class Samochód {
 
     Silnik silnik = new Silnik();
     Skrzynia_Biegów skrzynia = new Skrzynia_Biegów();
-
+    Sprzęgło sprzeglo = new Sprzęgło();
 
     public void wlacz(){
         silnik.uruchom();
@@ -36,25 +36,18 @@ public class Samochód {
         skrzynia.zmniejszBieg();
     }
 
-    private double przelozenie;
-
-    //public void przelozenie(){
-      //  skrzynia.przelozenieAbieg();
-        //przelozenie = skrzynia.getAktualnePrzelozenie();
-        //System.out.println("Wartość przełożenie to: " + przelozenie);
-    //}
-
     public String getModel(){
         return model;
     }
 
-    public int getPredkość_max(){
-        return predkość_max;
-    }
+    public void wcisnijSprzeglo(){sprzeglo.wcisnij();}
 
-    public String getNrRejestracji(){
-        return nrRejestracji;
-    }
+
+    public void zwolnijSprzeglo(){sprzeglo.zwolnij();}
+
+    public void zwieksz_obroty(){silnik.zwiekszObroty(100);}
+    public void zmniejsz_obroty(){silnik.zmniejszObroty(100);}
+
     public int getWaga(){
         return waga;
     }

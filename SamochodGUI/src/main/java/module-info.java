@@ -4,6 +4,7 @@ module org.example.samochodgui {
     requires Samochod;
     requires java.desktop;
 
+
     opens org.example.samochodgui to javafx.fxml;
     exports org.example.samochodgui;
 }

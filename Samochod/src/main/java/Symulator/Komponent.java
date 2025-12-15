@@ -8,18 +8,16 @@ public class Komponent {
     private String producent;
     private String model;
 
-
-    public void setNazwa(String nazwa){
+    public Komponent(String producent,String model,int cena, int waga, String nazwa){
         this.nazwa = nazwa;
-    }
-
-    public void setCena(int cena) {
+        this.producent = producent;
+        this.model = model;
         this.cena = cena;
-    }
-
-    public void setWaga(double waga) {
         this.waga = waga;
     }
+
+
+
 
     public String getNazwa() {
         return nazwa;
@@ -37,15 +35,9 @@ public class Komponent {
         return producent;
     }
 
-    public void setProducent(String producent) {
-        this.producent = producent;
-    }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
 }
