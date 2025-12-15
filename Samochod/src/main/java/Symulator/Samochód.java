@@ -13,16 +13,6 @@ public class Samochód {
         this.nrRejestracji = nrRejestracji;
         this.predkość_max = predkość_max;
         this.waga = waga;
-
-
-        wlacz();
-        zwiekszBieg();
-        zwiekszBieg();
-        zwiekszBieg();
-        zmniejszBieg();
-        zwiekszBieg();
-        przelozenie();
-        wylacz();
     }
 
 
@@ -48,11 +38,11 @@ public class Samochód {
 
     private double przelozenie;
 
-    public void przelozenie(){
-        skrzynia.przelozenieAbieg();
-        przelozenie = skrzynia.getAktualnePrzelozenie();
-        System.out.println("Wartość przełożenie to: " + przelozenie);
-    }
+    //public void przelozenie(){
+      //  skrzynia.przelozenieAbieg();
+        //przelozenie = skrzynia.getAktualnePrzelozenie();
+        //System.out.println("Wartość przełożenie to: " + przelozenie);
+    //}
 
     public String getModel(){
         return model;

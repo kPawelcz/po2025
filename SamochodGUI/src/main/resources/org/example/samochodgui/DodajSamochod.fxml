@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.samochodgui.DodajSamochodController">
+
+    <!-- Marginesy wewnętrzne okna -->
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- Tytuł okna -->
+    <Label text="Dodaj nowy samochód">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label>
+
+    <!-- Formularz oparty na siatce (GridPane) -->
+    <GridPane hgap="10.0" vgap="10.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+
+        <!-- Wiersz 0: Model -->
+        <Label text="Model:" GridPane.rowIndex="0" />
+        <TextField fx:id="inputModel" promptText="np. Fiat 126p" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <!-- Wiersz 1: Numer rejestracyjny -->
+        <Label text="Numer rejestracyjny:" GridPane.rowIndex="1" />
+        <TextField fx:id="inputRejestracja" promptText="np. WA 12345" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <!-- Wiersz 2: Waga -->
+        <Label text="Waga (kg):" GridPane.rowIndex="2" />
+        <TextField fx:id="inputWaga" promptText="np. 600" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <!-- Wiersz 3: Prędkość maksymalna -->
+        <Label text="Prędkość max (km/h):" GridPane.rowIndex="3" />
+        <TextField fx:id="inputPredkosc" promptText="np. 120" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    </GridPane>
+
+    <!-- Przyciski na dole -->
+    <HBox alignment="CENTER" spacing="20.0">
+        <children>
+            <Button fx:id="btnAnuluj" cancelButton="true" mnemonicParsing="false" text="Anuluj" />
+            <Button fx:id="btnZatwierdz" defaultButton="true" mnemonicParsing="false" text="Zatwierdź" />
+        </children>
+    </HBox>
+
+</VBox>

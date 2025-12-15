@@ -48,13 +48,13 @@
                             </columnConstraints>
                             <children>
                                 <Label text="Model" />
-                                <TextField fx:id="txtModel" GridPane.columnIndex="1" />
+                                <TextField fx:id="txtModel" GridPane.columnIndex="1" editable="false"/>
                                 <Label text="Nr rejestracyjny" GridPane.rowIndex="1" />
-                                <TextField fx:id="txtRejestracja" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <TextField fx:id="txtRejestracja" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false" />
                                 <Label text="Waga" GridPane.rowIndex="2" />
-                                <TextField fx:id="txtWagaSamochod" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <TextField fx:id="txtWagaSamochod" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false" />
                                 <Label text="Prędkość" GridPane.rowIndex="3" />
-                                <TextField fx:id="txtPredkosc" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <TextField fx:id="txtPredkosc" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false" />
                                 <HBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                     <children>
                                         <Button mnemonicParsing="false" text="Włącz" fx:id="startButton" onAction="#onStart" />
@@ -80,13 +80,13 @@
                             </columnConstraints>
                             <children>
                                 <Label text="Nazwa" />
-                                <TextField GridPane.columnIndex="1" fx:id="txtNazwaSB" />
+                                <TextField GridPane.columnIndex="1" fx:id="txtNazwaSB" editable="false"/>
                                 <Label text="Cena" GridPane.rowIndex="1" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtCenaSB"/>
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtCenaSB" editable="false"/>
                                 <Label text="Waga" GridPane.rowIndex="2" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtWagaSB"/>
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtWagaSB" editable="false"/>
                                 <Label text="Bieg" GridPane.rowIndex="3" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtBiegSB"/>
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtBiegSB" editable="false"/>
                                 <HBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                     <children>
                                         <Button mnemonicParsing="false" text="Zwiększ bieg" fx:id="zwiekszBieg" onAction="#zwiekszBieg"/>
@@ -111,13 +111,13 @@
                             </columnConstraints>
                             <children>
                                 <Label text="Nazwa" />
-                                <TextField GridPane.columnIndex="1" fx:id="txtNazwaS"/>
+                                <TextField GridPane.columnIndex="1" fx:id="txtNazwaS" editable="false"/>
                                 <Label text="Cena" GridPane.rowIndex="1" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtCenaS"/>
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtCenaS" editable="false"/>
                                 <Label text="Waga" GridPane.rowIndex="2" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtWagaS"/>
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtWagaS" editable="false"/>
                                 <Label text="Obroty" GridPane.rowIndex="3" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtObrotyS"/>
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtObrotyS" editable="false"/>
                                 <HBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                     <children>
                                         <Button mnemonicParsing="false" text="Dodaj gazu" fx:id="dodajGaz" onAction="#dodajGaz"/>
@@ -144,11 +144,11 @@
                                 <Label text="Nazwa" />
                                 <TextField GridPane.columnIndex="1" fx:id="txtNazwaSprz"/>
                                 <Label text="Cena" GridPane.rowIndex="1" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtCenaSprz" />
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtCenaSprz" editable="false"/>
                                 <Label text="Waga" GridPane.rowIndex="2" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtWagaSprz" />
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtWagaSprz" editable="false"/>
                                 <Label text="Stan" GridPane.rowIndex="3" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtStanSprz"/>
+                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtStanSprz" editable="false"/>
                                 <HBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                     <children>
                                         <Button mnemonicParsing="false" text="Naciśnij" fx:id="naccisnijSprzeglo" onAction="#nacisnijSprzeglo" />
@@ -199,7 +199,7 @@
                                 </ImageView> -->
 
                                 <!-- Zastępcza ikonka tekstowa -->
-                                <Label text="🚗" textFill="#e163d8">
+                                <Label fx:id = "carIkonka" text="🚗" textFill="#e163d8">
                                     <font>
                                         <Font size="40.0" />
                                     </font>

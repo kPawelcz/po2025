@@ -3,12 +3,19 @@ package org.example.samochodgui;
 import Symulator.Skrzynia_Biegów;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import Symulator.Samochód;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +47,7 @@ public class HelloController {
     public TextField txtWagaSprz;
     public TextField txtCenaSprz;
     public TextField txtNazwaSprz;
+    public Label carIkonka;
     @FXML
     private TextField txtModel;
 
@@ -62,6 +70,15 @@ public class HelloController {
     public void initialize() {
         // Ta metoda uruchamia się automatycznie po załadowaniu FXML
         System.out.println("Aplikacja uruchomiona!");
+
+        if (carIkonka != null) {
+            System.out.println("Inicjalizacja ikony samochodu");
+
+            // Ustawienie pozycji (0,0)
+            carIkonka.setLayoutX(0);
+            carIkonka.setLayoutY(0);
+            System.out.println("Pozycja auta ustawiona na: X=" + carIkonka.getLayoutX() + ", Y=" + carIkonka.getLayoutY());
+        }
 
         Samochód fiat = new Samochód("Fiat 126p", "WA 12345", 120 , 1500);
         Samochód polonez = new Samochód("Polonez Caro", "WB 98765", 150, 1300);
@@ -90,7 +107,7 @@ public class HelloController {
     public void oncmbSamochod(ActionEvent actionEvent) {
         // 1. Pobieramy nazwę wybraną przez użytkownika
         String wybranyModel = cmbSamochod.getValue();
-        System.out.println("Wybrano z listy: " + wybranyModel);
+
 
         // 2. Szukamy obiektu samochodu na liście, który pasuje do tej nazwy
         for (Samochód auto : listaSamochodow) {
@@ -112,8 +129,20 @@ public class HelloController {
             txtRejestracja.setText(mojSamochod.nrRejestracji); // lub getNrRejestracji()
             txtPredkosc.setText(String.valueOf(mojSamochod.predkość_max)); // lub getPredkoscMax()
             txtWagaSamochod.setText(String.valueOf(mojSamochod.getWaga()));
-            // Jeśli masz pole waga:
-            // txtWagaSamochod.setText(String.valueOf(mojSamochod.getWaga()));
+            txtNazwaSB.setText("test");
+            txtBiegSB.setText("test");
+            txtCenaSB.setText("test");
+            txtWagaSB.setText("test");
+            txtNazwaS.setText("test");
+            txtCenaS.setText("test");
+            txtWagaS.setText("test");
+            txtObrotyS.setText("test");
+            txtNazwaSprz.setText("test");
+            txtCenaSprz.setText("test");
+            txtWagaSprz.setText("test");
+            txtStanSprz.setText("test");
+
+
         }
     }
 
@@ -140,6 +169,7 @@ public class HelloController {
         if (mojSamochod != null) {
             mojSamochod.zmniejszBieg();
             System.out.println("Bieg: " + mojSamochod.dajBieg());
+            aktualizujWyswietlaneDane();
         }
     }
 
@@ -148,6 +178,13 @@ public class HelloController {
         if (mojSamochod != null) {
             mojSamochod.zwiekszBieg();
             System.out.println("Bieg: " + mojSamochod.dajBieg());
+            wyczyscPola();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            aktualizujWyswietlaneDane();
         }
     }
 
@@ -163,10 +200,53 @@ public class HelloController {
     public void zwolnijSprzeglo(ActionEvent actionEvent) {
     }
 
-    public void dodajNowy(ActionEvent actionEvent) {
-    }
+
 
     public void usunNowy(ActionEvent actionEvent) {
+        // 1. Sprawdź, czy w ogóle jest wybrany jakiś samochód
+        if (mojSamochod == null) {
+            System.out.println("Nie wybrano samochodu do usunięcia.");
+            return;
+        }
+
+        System.out.println("Usuwanie samochodu: " + mojSamochod.getModel());
+
+        // 2. Usuń auto z listy obiektów (logika)
+        listaSamochodow.remove(mojSamochod);
+
+        // 3. Usuń nazwę auta z ComboBoxa (wygląd)
+        cmbSamochod.getItems().remove(mojSamochod.getModel());
+
+        // Czyścimy wybór w ComboBoxie
+        cmbSamochod.setValue(null);
+
+        // 4. Sprzątanie po usunięciu
+        mojSamochod = null; // Aktualny samochód przestaje istnieć
+
+        // 5. Decyzja co wyświetlić teraz
+        if (!listaSamochodow.isEmpty()) {
+            // Jeśli są jeszcze inne auta, wybierzmy automatycznie pierwsze z listy
+            Samochód inneAuto = listaSamochodow.get(0);
+            mojSamochod = inneAuto;
+
+            // Ustawiamy w ComboBoxie i odświeżamy pola
+            cmbSamochod.setValue(inneAuto.getModel());
+            aktualizujWyswietlaneDane();
+        } else {
+            // Jeśli lista jest pusta, czyścimy wszystkie pola tekstowe
+            wyczyscPola();
+        }
+    }
+
+
+    private void wyczyscPola() {
+        txtModel.clear();
+        txtRejestracja.clear();
+        txtPredkosc.clear();
+        txtWagaSamochod.clear();
+        txtNazwaSB.clear();
+        txtBiegSB.clear();
+
     }
 
     public void Button(ActionEvent actionEvent) {
@@ -174,9 +254,53 @@ public class HelloController {
     }
 
 
+    // 1. Metoda wywoływana przez przycisk "Dodaj nowy" w głównym oknie
+    @FXML
+    public void dodajNowy(ActionEvent actionEvent) {
+        try {
+            // Ładujemy plik FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DodajSamochod.fxml"));
+            Parent root = loader.load();
 
+            // Pobieramy kontroler nowo utworzonego okna
+            DodajSamochodController controller = loader.getController();
 
-    // Tutaj możesz dodawać metody obsługi przycisków, np.:
-    // @FXML
-    // private void handleDodajNowy() { ... }
+            // KLUCZOWE: Przekazujemy "siebie" (główny kontroler) do nowego okna
+            controller.setMainController(this);
+
+            // Tworzymy i wyświetlamy nowe okno
+            Stage stage = new Stage();
+            stage.setTitle("Dodaj nowy samochód");
+            stage.setScene(new Scene(root));
+
+            // Ustawiamy, że to okno blokuje okno główne dopóki nie zostanie zamknięte
+            stage.initModality(Modality.WINDOW_MODAL);
+            // stage.initOwner(startButton.getScene().getWindow()); // Opcjonalne: ustawia rodzica
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Nie udało się otworzyć okna dodawania.");
+            throw new RuntimeException(e);
+        }
+    }
+
+    // 2. Metoda publiczna, którą wywoła DodajSamochodController po kliknięciu "Zatwierdź"
+    public void odbierzNowySamochod(Samochód noweAuto) {
+        // Dodajemy do listy logicznej
+        listaSamochodow.add(noweAuto);
+
+        // Dodajemy nazwę do ComboBoxa
+        if (cmbSamochod != null) {
+            cmbSamochod.getItems().add(noweAuto.getModel());
+
+            // Opcjonalnie: od razu wybieramy nowo dodane auto
+            cmbSamochod.setValue(noweAuto.getModel());
+            // Wywołujemy obsługę zmiany, żeby zaktualizować pola tekstowe
+            oncmbSamochod(null);
+        }
+
+        System.out.println("Dodano nowe auto: " + noweAuto.getModel());
+    }
 }
