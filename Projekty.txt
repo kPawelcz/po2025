@@ -107,3 +107,6 @@ Krzysztof Słowikowski, Hanna Kałamaga
 
 40) System do pomiarów natężenia ruchu rowerowego: VideoTagger + sporządzanie statystyk.
 Szymon Kumorek, Jakub Bogunia
+
+41) Platforma randkowa dla studentów, porównująca dostępność według planu (Na zasadzie Tindera) 
+Rozalia Mitkowska, Kamil Pawelczak
