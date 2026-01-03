@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelloController {
+public class SamochodController {
 
     private Samochod mojSamochod;
     private List<Samochod> listaSamochodow = new ArrayList<>();
@@ -80,9 +80,13 @@ public class HelloController {
             System.out.println("Pozycja auta ustawiona na: X=" + carIkonka.getLayoutX() + ", Y=" + carIkonka.getLayoutY());
         }
 
-        Samochod fiat = new Samochod("Fiat 126p", "WA 12345", 120 , 1500);
-        Samochod polonez = new Samochod("Polonez Caro", "WB 98765", 150, 1300);
-        Samochod syrena = new Samochod("Syrena 105", "WE 55555", 90, 1700);
+        Samochod fiat = new Samochod("WA 12345","Fiat 126p",   1500);
+        Samochod polonez = new Samochod("WB 98765","Polonez Caro" , 1300);
+        Samochod syrena = new Samochod("WE 55555", "Syrena 105",  1700);
+
+        fiat.start();
+        polonez.start();
+        syrena.start();
 
         listaSamochodow.add(fiat);
         listaSamochodow.add(polonez);
@@ -99,6 +103,31 @@ public class HelloController {
             // Ustawiamy domyślną wartość w ComboBoxie
             cmbSamochod.setValue(fiat.getModel());
         }
+
+        Thread refreshThread = new Thread(() -> {
+            while (true) {
+                try {
+                    // Odświeżamy co 100ms (10 razy na sekundę)
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    break;
+                }
+
+                // WAŻNE: Aktualizacje GUI muszą być robione w wątku JavaFX
+                javafx.application.Platform.runLater(() -> {
+                    aktualizujWyswietlaneDane();
+
+                    // Tu dodamy później aktualizację kropki na mapie
+                    if (mojSamochod != null && carIkonka != null) {
+                        carIkonka.setLayoutX(mojSamochod.getPozycja().getX());
+                        carIkonka.setLayoutY(mojSamochod.getPozycja().getY());
+                    }
+                });
+            }
+        });
+        // Ustawiamy jako Daemon - żeby wątek zginął razem z zamknięciem okna
+        refreshThread.setDaemon(true);
+        refreshThread.start();
     }
 
 
@@ -125,23 +154,30 @@ public class HelloController {
     private void aktualizujWyswietlaneDane() {
 
         if (mojSamochod != null) {
-            txtModel.setText(mojSamochod.getModel());
-            txtRejestracja.setText(mojSamochod.nrRejestracji); // lub getNrRejestracji()
-            txtPredkosc.setText(String.valueOf(mojSamochod.predkość_max)); // lub getPredkoscMax()
-            txtWagaSamochod.setText(String.valueOf(mojSamochod.getWaga()));
-            txtNazwaSB.setText("test");
-            txtBiegSB.setText("test");
-            txtCenaSB.setText("test");
-            txtWagaSB.setText("test");
-            txtNazwaS.setText("test");
-            txtCenaS.setText("test");
-            txtWagaS.setText("test");
-            txtObrotyS.setText("test");
-            txtNazwaSprz.setText("test");
-            txtCenaSprz.setText("test");
-            txtWagaSprz.setText("test");
-            txtStanSprz.setText("test");
 
+            txtModel.setText(mojSamochod.getModel());
+            txtRejestracja.setText(mojSamochod.getNrRejestracyjny()); // lub getNrRejestracji()
+            txtPredkosc.setText(String.format("%.1f km/h", mojSamochod.getPredkosc())); // lub getPredkoscMax()
+            txtWagaSamochod.setText(String.valueOf(mojSamochod.getSilnik().getWaga() + mojSamochod.getSkrzynia().getWaga() + mojSamochod.getSprzeglo().getWaga()));
+
+            txtNazwaSB.setText(mojSamochod.getSkrzynia().getNazwa());
+            txtBiegSB.setText(String.valueOf(mojSamochod.getSkrzynia().getAktualnyBieg()));
+            txtCenaSB.setText(String.valueOf(mojSamochod.getSkrzynia().getCena()));
+            txtWagaSB.setText(String.valueOf(mojSamochod.getSkrzynia().getWaga()));
+
+            txtNazwaS.setText(mojSamochod.getSilnik().getNazwa());
+            txtCenaS.setText(String.valueOf(mojSamochod.getSilnik().getCena()));
+            txtWagaS.setText(String.valueOf(mojSamochod.getSilnik().getWaga()));
+            txtObrotyS.setText(String.valueOf(mojSamochod.getSilnik().getObroty()));
+
+            txtNazwaSprz.setText(mojSamochod.getSprzeglo().getNazwa());
+            txtCenaSprz.setText(String.valueOf(mojSamochod.getSprzeglo().getCena()));
+            txtWagaSprz.setText(String.valueOf(mojSamochod.getSprzeglo().getWaga()));
+            if (mojSamochod.getSprzeglo().isStanSprzegla()) {
+                txtStanSprz.setText("Wciśnięte");
+            } else {
+                txtStanSprz.setText("Zwolnione");
+            }
 
         }
     }
@@ -149,55 +185,67 @@ public class HelloController {
     public void onStart(ActionEvent actionEvent) {
         System.out.println("Próba włączenia silnika...");
         if (mojSamochod != null) {
-            mojSamochod.wlacz();
+            mojSamochod.getSilnik().uruchom();
             System.out.println("Samochód włączony");
         }
-
+        aktualizujWyswietlaneDane();
     }
 
     public void onEnd(ActionEvent actionEvent) {
         System.out.println("Próba wyłączenia silnika...");
         if (mojSamochod != null) {
-            mojSamochod.wylacz();
+            mojSamochod.getSilnik().zatrzymaj();
             System.out.println("Samochód wyłączony");
-        }
 
+        }
+        aktualizujWyswietlaneDane();
     }
 
     public void zmniejszBieg(ActionEvent actionEvent) {
-        System.out.println("Zmniejszanie biegu...");
         if (mojSamochod != null) {
-            mojSamochod.zmniejszBieg();
-            System.out.println("Bieg: " + mojSamochod.dajBieg());
+            boolean stan = mojSamochod.getSprzeglo().isStanSprzegla();
+            mojSamochod.getSkrzynia().zmniejszBieg(stan);
             aktualizujWyswietlaneDane();
         }
     }
 
     public void zwiekszBieg(ActionEvent actionEvent) {
-        System.out.println("Zwiekszenie biegu...");
         if (mojSamochod != null) {
-            mojSamochod.zwiekszBieg();
-            System.out.println("Bieg: " + mojSamochod.dajBieg());
-            wyczyscPola();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            boolean stan = mojSamochod.getSprzeglo().isStanSprzegla();
+            mojSamochod.getSkrzynia().zwiekszBieg(stan);
             aktualizujWyswietlaneDane();
         }
     }
 
     public void ujmijGaz(ActionEvent actionEvent) {
+        if (mojSamochod != null){
+            mojSamochod.getSilnik().zmniejszObroty(500);
+        }
+        aktualizujWyswietlaneDane();
     }
 
     public void dodajGaz(ActionEvent actionEvent) {
+        if (mojSamochod != null){
+            mojSamochod.getSilnik().zwiekszObroty(500);
+
+        }
+        aktualizujWyswietlaneDane();
     }
 
     public void nacisnijSprzeglo(ActionEvent actionEvent) {
+        if (mojSamochod != null) {
+            mojSamochod.getSprzeglo().wcisnij();
+            System.out.println("Sprzęgło jest wciśnięte");
+            aktualizujWyswietlaneDane();
+        }
     }
 
     public void zwolnijSprzeglo(ActionEvent actionEvent) {
+        if (mojSamochod != null) {
+            mojSamochod.getSprzeglo().zwolnij();
+            System.out.println("Sprzęgło nie jest wciśnięte");
+            aktualizujWyswietlaneDane();
+        }
     }
 
 

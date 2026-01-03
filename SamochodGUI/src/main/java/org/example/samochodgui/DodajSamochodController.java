@@ -12,16 +12,16 @@ public class DodajSamochodController {
     @FXML private TextField inputModel;
     @FXML private TextField inputRejestracja;
     @FXML private TextField inputWaga;
-    @FXML private TextField inputPredkosc;
+
 
     @FXML private Button btnZatwierdz;
     @FXML private Button btnAnuluj;
 
     // Referencja do głównego kontrolera, żebyśmy mogli mu oddać nowe auto
-    private HelloController mainController;
+    private SamochodController mainController;
 
     // Metoda, którą wywoła HelloController, żeby się "przedstawić"
-    public void setMainController(HelloController mainController) {
+    public void setMainController(SamochodController mainController) {
         this.mainController = mainController;
     }
 
@@ -36,22 +36,26 @@ public class DodajSamochodController {
         String model = inputModel.getText();
         String rejestracja = inputRejestracja.getText();
         double waga;
-        int predkosc;
+
+        if (model.isEmpty() || rejestracja.isEmpty() || inputWaga.getText().isEmpty()) {
+            pokazBlad("Wszystkie pola muszą być wypełnione!");
+            return;
+        }
 
         // Walidacja danych
         try {
             waga = Double.parseDouble(inputWaga.getText());
-            predkosc = Integer.parseInt(inputPredkosc.getText());
+
         } catch (NumberFormatException e) {
-            System.out.println("Błąd: Waga i prędkość muszą być liczbami!");
-            // Tu można dodać np. Alert z błędem
+            pokazBlad("Błąd: Waga musi być liczbą!");
             return;
         }
 
         // Tworzymy nowy obiekt samochodu
         // UWAGA: Upewnij się, że Twój konstruktor w klasie Samochód przyjmuje double dla wagi
         // Jeśli waga w klasie Samochód to int, rzutuj: (int) waga
-        Samochod noweAuto = new Samochod(model, rejestracja, predkosc, (int)waga);
+        Samochod noweAuto = new Samochod(rejestracja,model, (int)waga);
+        noweAuto.start();
 
         // Przekazujemy auto do głównego kontrolera
         if (mainController != null) {
@@ -64,5 +68,13 @@ public class DodajSamochodController {
     private void zamknijOkno() {
         Stage stage = (Stage) btnAnuluj.getScene().getWindow();
         stage.close();
+    }
+
+    private void pokazBlad(String komunikat) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle("Błąd danych");
+        alert.setHeaderText(null);
+        alert.setContentText(komunikat);
+        alert.showAndWait();
     }
 }
