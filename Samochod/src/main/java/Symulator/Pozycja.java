@@ -3,32 +3,30 @@ package Symulator;
 import static java.lang.Math.sqrt;
 
 public class Pozycja {
-    public double x = 0;
-    public double y = 0;
-    private String kordynaty;
-    double odleglosc;
+    private double x = 0;
+    private double y = 0;
 
-    void aktualizujPozycje(double deltaX, double deltaY){
-        x = x + deltaX;
-        y = y + deltaY;
+    public Pozycja(double startX, double startY){
+        this.x = startX;
+        this.y = startY;
     }
 
-    void aktualizujPozycjeX(double deltaX){
-        x = x + deltaX;
+    public double getX() {
+        return x;
     }
 
-    void aktualizujPozycjeY(double deltaY){
-        y = y + deltaY;
+    public double getY() {
+        return y;
     }
 
-    String getPozycja(){
-        kordynaty = "Samochód znajduje się na współrzędnych X: " + x + " Y: " + y;
-        return kordynaty;
+    public void przemiesc(double deltaX, double deltaY){
+        this.x += deltaX;
+        this.y += deltaY;
+
     }
 
-    void ileDoDomu(){
-        odleglosc = sqrt(x*x + y*y);
-        System.out.println("Twoja odległość od domu wynosi: " + odleglosc);
+    @Override
+    public String toString() {
+        return "Poz: [" + String.format("%.2f", x) + ", " + String.format("%.2f", y) + "]";
     }
-
 }

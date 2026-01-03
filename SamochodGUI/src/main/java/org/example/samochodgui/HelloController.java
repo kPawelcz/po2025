@@ -1,6 +1,6 @@
 package org.example.samochodgui;
 
-import Symulator.Skrzynia_Biegów;
+import Symulator.SkrzyniaBiegow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import Symulator.Samochód;
+import Symulator.Samochod;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -21,9 +21,9 @@ import java.util.List;
 
 public class HelloController {
 
-    private Samochód mojSamochod;
-    private List<Samochód> listaSamochodow = new ArrayList<>();
-    private Skrzynia_Biegów skrzynia;
+    private Samochod mojSamochod;
+    private List<Samochod> listaSamochodow = new ArrayList<>();
+    private SkrzyniaBiegow skrzynia;
     public Button startButton;
     public Button endButton;
     public Button zwiekszBieg;
@@ -80,9 +80,9 @@ public class HelloController {
             System.out.println("Pozycja auta ustawiona na: X=" + carIkonka.getLayoutX() + ", Y=" + carIkonka.getLayoutY());
         }
 
-        Samochód fiat = new Samochód("Fiat 126p", "WA 12345", 120 , 1500);
-        Samochód polonez = new Samochód("Polonez Caro", "WB 98765", 150, 1300);
-        Samochód syrena = new Samochód("Syrena 105", "WE 55555", 90, 1700);
+        Samochod fiat = new Samochod("Fiat 126p", "WA 12345", 120 , 1500);
+        Samochod polonez = new Samochod("Polonez Caro", "WB 98765", 150, 1300);
+        Samochod syrena = new Samochod("Syrena 105", "WE 55555", 90, 1700);
 
         listaSamochodow.add(fiat);
         listaSamochodow.add(polonez);
@@ -92,7 +92,7 @@ public class HelloController {
         aktualizujWyswietlaneDane();
         // Przykładowe dodanie danych do ComboBoxa
         if (cmbSamochod != null) {
-            for (Samochód s : listaSamochodow) {
+            for (Samochod s : listaSamochodow) {
                 // Używamy gettera (musisz go mieć w klasie Samochód) lub pola publicznego
                 cmbSamochod.getItems().add(s.getModel());
             }
@@ -110,7 +110,7 @@ public class HelloController {
 
 
         // 2. Szukamy obiektu samochodu na liście, który pasuje do tej nazwy
-        for (Samochód auto : listaSamochodow) {
+        for (Samochod auto : listaSamochodow) {
             if (auto.getModel().equals(wybranyModel)) {
                 // 3. Podmieniamy aktualny samochód na ten wybrany
                 mojSamochod = auto;
@@ -226,7 +226,7 @@ public class HelloController {
         // 5. Decyzja co wyświetlić teraz
         if (!listaSamochodow.isEmpty()) {
             // Jeśli są jeszcze inne auta, wybierzmy automatycznie pierwsze z listy
-            Samochód inneAuto = listaSamochodow.get(0);
+            Samochod inneAuto = listaSamochodow.get(0);
             mojSamochod = inneAuto;
 
             // Ustawiamy w ComboBoxie i odświeżamy pola
@@ -287,7 +287,7 @@ public class HelloController {
     }
 
     // 2. Metoda publiczna, którą wywoła DodajSamochodController po kliknięciu "Zatwierdź"
-    public void odbierzNowySamochod(Samochód noweAuto) {
+    public void odbierzNowySamochod(Samochod noweAuto) {
         // Dodajemy do listy logicznej
         listaSamochodow.add(noweAuto);
 

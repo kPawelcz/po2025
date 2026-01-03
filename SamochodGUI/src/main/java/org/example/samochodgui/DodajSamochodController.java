@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import Symulator.Samochód;
+import Symulator.Samochod;
 
 public class DodajSamochodController {
 
@@ -51,7 +51,7 @@ public class DodajSamochodController {
         // Tworzymy nowy obiekt samochodu
         // UWAGA: Upewnij się, że Twój konstruktor w klasie Samochód przyjmuje double dla wagi
         // Jeśli waga w klasie Samochód to int, rzutuj: (int) waga
-        Samochód noweAuto = new Samochód(model, rejestracja, predkosc, (int)waga);
+        Samochod noweAuto = new Samochod(model, rejestracja, predkosc, (int)waga);
 
         // Przekazujemy auto do głównego kontrolera
         if (mainController != null) {
