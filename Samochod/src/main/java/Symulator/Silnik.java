@@ -4,68 +4,54 @@ public class Silnik extends Komponent{
 
     private int maxobroty;
     private int obroty;
+    private boolean uruchomiony;
 
-    public Silnik(String nazwa, int cena, int Waga, int maxobroty ){
-        super(nazwa,cena,Waga);
+    public Silnik(String producent, String model, int cena, int waga, String nazwa, int maxobroty ){
+        super(producent, model, cena, waga, nazwa);
         this.maxobroty = maxobroty;
+        this.uruchomiony = false;
     };
 
     public int getObroty() {
         return obroty;
     }
 
-    void zwiekszObroty(int zwiekszenie){
-        if(obroty < maxobroty){
-            if(obroty + zwiekszenie < maxobroty){
-                obroty += zwiekszenie;
-            }
-            else{
-                obroty = maxobroty;
+    public void zwiekszObroty(int zwiekszenie){
+        if(uruchomiony) {
+            if (obroty < maxobroty) {
+                if (obroty + zwiekszenie < maxobroty) {
+                    obroty += zwiekszenie;
+                } else {
+                    obroty = maxobroty;
+                }
+            } else {
+                System.out.println("Obroty są już na maksymalnym poziomie! --- " + maxobroty);
             }
         }
-        else{
-            System.out.println("Obroty są już na maksymalnym poziomie! --- " + maxobroty);
-        }
-
     }
 
-    void zmniejszObroty(int zmniejszenie){
-        if(obroty > 0){
-            if(obroty - zmniejszenie > 0){
-                obroty += zmniejszenie;
-            }
-            else{
-                obroty = 0;
-            }
-        }
-        else{
-            System.out.println("Obroty są już na minimalnym poziomie! --- " + 0);
-        }
-
+    public void zmniejszObroty(int zmniejszenie){
+         if(uruchomiony){
+             if (obroty > 0) {
+                 if (obroty - zmniejszenie > 0) {
+                     obroty -= zmniejszenie;
+                 } else {
+                     obroty = 0;
+                 }
+             } else {
+                 System.out.println("Obroty są już na minimalnym poziomie! --- " + 0);
+             }
+         }
     }
 
-    void uruchom(){
+    public void uruchom(){
+        uruchomiony = true;
         obroty = 1000;
     }
 
-    void zatrzymaj(){
+    public void zatrzymaj(){
+        uruchomiony = false;
         obroty = 0;
-    }
-
-
-    @Override
-    public String getNazwa() {
-        return super.getNazwa();
-    }
-
-    @Override
-    public int getCena() {
-        return super.getCena();
-    }
-
-    @Override
-    public double getWaga() {
-        return super.getWaga();
     }
 
 

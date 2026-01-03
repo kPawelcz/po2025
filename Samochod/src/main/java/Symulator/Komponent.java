@@ -1,6 +1,6 @@
 package Symulator;
 
-public class Komponent {
+public abstract class Komponent {
 
     private String nazwa;
     private int cena;
