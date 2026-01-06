@@ -1,5 +1,6 @@
 package org.example.samochodgui;
 
+import Symulator.Pozycja;
 import Symulator.SkrzyniaBiegow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,10 +95,10 @@ public class SamochodController {
 
         mojSamochod = fiat;
         aktualizujWyswietlaneDane();
-        // Przykładowe dodanie danych do ComboBoxa
+
         if (cmbSamochod != null) {
             for (Samochod s : listaSamochodow) {
-                // Używamy gettera (musisz go mieć w klasie Samochód) lub pola publicznego
+
                 cmbSamochod.getItems().add(s.getModel());
             }
             // Ustawiamy domyślną wartość w ComboBoxie
@@ -128,6 +129,24 @@ public class SamochodController {
         // Ustawiamy jako Daemon - żeby wątek zginął razem z zamknięciem okna
         refreshThread.setDaemon(true);
         refreshThread.start();
+
+        if (mojSamochod != null) {
+            mapPane.setOnMouseClicked(mouseEvent -> {
+                if (mojSamochod.getSilnik().getObroty() == 0) {
+                    System.out.println("Nie pojadę! Włącz silnik.");
+                    return; // Przerywamy, nie ustawiamy celu
+                }
+                if (mojSamochod.getSkrzynia().getAktualnyBieg() == 0) {
+                    System.out.println("Nie pojadę! Wrzuć bieg.");
+                    return; // Przerywamy
+                }
+
+                double x = mouseEvent.getX();
+                double y = mouseEvent.getY();
+                Pozycja nowaPozycja = new Pozycja(x, y);
+                mojSamochod.jedzDo(nowaPozycja);
+            });
+        }
     }
 
 
@@ -179,6 +198,10 @@ public class SamochodController {
                 txtStanSprz.setText("Zwolnione");
             }
 
+            if(carIkonka != null){
+                carIkonka.setLayoutX(mojSamochod.getPozycja().getX());
+                carIkonka.setLayoutY(mojSamochod.getPozycja().getY());
+            }
         }
     }
 

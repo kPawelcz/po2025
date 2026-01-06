@@ -10,15 +10,33 @@ public class Samochod extends Thread{
     private String nrRejestracyjny;
     private String model;
     private double predkosc;
+    private Pozycja cel;
+
 
     public Samochod(String nrRejestracyjny, String model, int waga){
         this.nrRejestracyjny = nrRejestracyjny;
         this.model = model;
         this.predkosc = 0.0;
 
-        this.silnik = new Silnik("Producent", "V8", 5000, waga/2, "Silnik", 6000);
-        this.skrzynia = new SkrzyniaBiegow("Producent", "Manual", 1000, 50, "Skrzynia", 5);
-        this.sprzeglo = new Sprzeglo("Producent", "Standard", 500, 10, "Sprzęgło");
+        if (waga < 1000) {
+            // Małe auto (np. Fiat 126p)
+            // Słabszy silnik (4500 obrotów), skrzynia 4-biegowa
+            this.silnik = new Silnik("FSM", "R2", 1000, 100, "Mały Silnik", 4500);
+            this.skrzynia = new SkrzyniaBiegow("FSM", "Manual", 500, 30, "Skrzynia 4B", 4);
+
+        } else if (waga < 1600) {
+            // Średnie auto (np. Polonez)
+            // Średni silnik (6000 obrotów), skrzynia 5-biegowa
+            this.silnik = new Silnik("FSO", "R4", 3000, 150, "Silnik 1.6", 6000);
+            this.skrzynia = new SkrzyniaBiegow("FSO", "Manual", 1000, 50, "Skrzynia 5B", 5);
+
+        } else {
+            // Ciężkie/Sportowe auto
+            // Mocny silnik (7500 obrotów), skrzynia 6-biegowa
+            this.silnik = new Silnik("V8", "Turbo", 10000, 300, "Monster V8", 7500);
+            this.skrzynia = new SkrzyniaBiegow("ZF", "Sport", 3000, 80, "Skrzynia 6B", 6);
+        }
+        this.sprzeglo = new Sprzeglo("Valeo", "Standard", 500, 10, "Sprzęgło");
         this.pozycja = new Pozycja(0, 0);
     }
 
@@ -55,35 +73,49 @@ public class Samochod extends Thread{
         return model + " (" + nrRejestracyjny + ")";
     }
 
+    public void jedzDo(Pozycja nowaPozycja){
+        cel = nowaPozycja;
+    }
+
     @Override
     public void run() {
-        while (true) { // Pętla nieskończona - symulacja działa cały czas
+        // Zgodnie z PDF: deltat (krok czasowy) = 0.1 sekundy
+        double deltat = 0.1;
+
+        while (true) {
             try {
-                // 1. Sprawdzamy czy silnik działa
+                // Obliczamy prędkość
                 if (silnik.getObroty() > 0) {
-
-                    // 2. Pobieramy aktualny bieg
                     int bieg = skrzynia.getAktualnyBieg();
-
-                    // 3. Prosty wzór fizyczny: V = Obroty * Bieg * Stała
-                    // (Na luzie bieg = 0, więc prędkość = 0 - logiczne)
                     this.predkosc = silnik.getObroty() * bieg * 0.005;
-
-                    // 4. Aktualizujemy pozycję na mapie (Lab 10 - jazda do celu)
-                    // Zakładamy, że jedziemy "na skos" (zwiększamy X i Y)
-                    // Szybciej jedziesz -> szybciej się przemieszczasz
-                    pozycja.przemiesc(this.predkosc * 0.01, this.predkosc * 0.01);
-
                 } else {
                     this.predkosc = 0.0;
                 }
 
-                // 5. Czekamy 100ms (żeby nie zajechać procesora)
+                // Sprawdzamy, czy mamy wyznaczony cel
+                if (cel != null) {
+
+                    double deltaX = cel.getX() - pozycja.getX();
+                    double deltaY = cel.getY() - pozycja.getY();
+                    double odleglosc = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                    if (odleglosc > 1) {
+
+                        double ruchX = this.predkosc * deltat * deltaX / odleglosc;
+                        double ruchY = this.predkosc * deltat * deltaY / odleglosc;
+
+
+                        pozycja.przemiesc(ruchX, ruchY);
+                    } else {
+
+                        cel = null;
+                    }
+                }
+
                 Thread.sleep(100);
 
             } catch (InterruptedException e) {
-                // Jeśli ktoś przerwie wątek, kończymy działanie
-                System.out.println("Symulacja samochodu przerwana.");
+                System.out.println("Wątek przerwany");
                 break;
             }
         }
