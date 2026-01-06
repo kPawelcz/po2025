@@ -79,7 +79,6 @@ public class Samochod extends Thread{
 
     @Override
     public void run() {
-        // Zgodnie z PDF: deltat (krok czasowy) = 0.1 sekundy
         double deltat = 0.1;
 
         while (true) {
@@ -94,28 +93,32 @@ public class Samochod extends Thread{
 
                 // Sprawdzamy, czy mamy wyznaczony cel
                 if (cel != null) {
-
                     double deltaX = cel.getX() - pozycja.getX();
                     double deltaY = cel.getY() - pozycja.getY();
-                    double odleglosc = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                    double dystansDoCelu = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-                    if (odleglosc > 1) {
+                    // Obliczamy krok w tej klatce
+                    double krok = this.predkosc * deltat;
 
-                        double ruchX = this.predkosc * deltat * deltaX / odleglosc;
-                        double ruchY = this.predkosc * deltat * deltaY / odleglosc;
-
-
+                    if (dystansDoCelu > krok) {
+                        // Mamy daleko -> jedziemy kawałek
+                        double ruchX = deltaX * (krok / dystansDoCelu);
+                        double ruchY = deltaY * (krok / dystansDoCelu);
                         pozycja.przemiesc(ruchX, ruchY);
                     } else {
-
-                        cel = null;
+                        // Jesteśmy blisko -> stajemy idealnie w celu
+                        // To eliminuje "drganie" w logach
+                        pozycja = new Pozycja(cel.getX(), cel.getY());
+                        cel = null; // Cel osiągnięty
                     }
+
+                    // Opcjonalnie: Logowanie tylko co jakiś czas, żeby nie śmiecić
+                    // System.out.println("Auto jedzie: " + pozycja);
                 }
 
                 Thread.sleep(100);
 
             } catch (InterruptedException e) {
-                System.out.println("Wątek przerwany");
                 break;
             }
         }

@@ -188,18 +188,11 @@
                     <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Mapa" />
 
-                        <!-- Samochód na mapie -->
-                        <VBox alignment="CENTER" layoutX="25.0" layoutY="50.0">
-                            <children>
-                                <!-- Tu możesz odkomentować ImageView, jeśli masz plik graficzny -->
-                                <!-- <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                     <image>
-                                        <Image url="@car.png" />
-                                     </image>
-                                </ImageView> -->
 
-                                <!-- Zastępcza ikonka tekstowa -->
-                                <Label fx:id = "carIkonka" text="🚗" textFill="#e163d8">
+                        <VBox fx:id= "carIkonka" alignment="CENTER" layoutX="25.0" layoutY="50.0">
+                            <children>
+                                <!-- Tu usunąłem fx:id, bo identyfikujemy całą grupę, a nie tylko emotkę -->
+                                <Label text="🚗" textFill="#e163d8">
                                     <font>
                                         <Font size="40.0" />
                                     </font>

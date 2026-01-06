@@ -50,7 +50,7 @@
         <!-- Wiersz 2: Waga -->
         <Label text="Waga (kg):" GridPane.rowIndex="2" />
         <TextField fx:id="inputWaga" promptText="np. 600" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
+        
     </GridPane>
 
     <!-- Przyciski na dole -->

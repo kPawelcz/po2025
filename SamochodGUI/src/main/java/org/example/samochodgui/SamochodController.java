@@ -9,10 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import Symulator.Samochod;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -48,7 +48,10 @@ public class SamochodController {
     public TextField txtWagaSprz;
     public TextField txtCenaSprz;
     public TextField txtNazwaSprz;
-    public Label carIkonka;
+
+    @FXML
+    public VBox carIkonka;
+
     @FXML
     private TextField txtModel;
 
