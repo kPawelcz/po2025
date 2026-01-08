@@ -18,26 +18,36 @@ public class Samochod extends Thread{
         this.model = model;
         this.predkosc = 0.0;
 
-        if (waga < 1000) {
+        if(model.equals("Porsche")){
+            this.silnik = new Silnik("V8", "Turbo", 10000, 300, "Monster V8", 7500);
+            this.skrzynia = new SkrzyniaBiegow("ZF", "Sport", 3000, 80, "Skrzynia 6B", 6);
+            this.sprzeglo = new Sprzeglo("BrumBrum", "Wściekłe", 700, 10, "Szybkie Sprzęgło");
+            this.pozycja = new Pozycja(20, 100);
+
+        } else if (waga < 1000) {
             // Małe auto (np. Fiat 126p)
             // Słabszy silnik (4500 obrotów), skrzynia 4-biegowa
             this.silnik = new Silnik("FSM", "R2", 1000, 100, "Mały Silnik", 4500);
             this.skrzynia = new SkrzyniaBiegow("FSM", "Manual", 500, 30, "Skrzynia 4B", 4);
+            this.sprzeglo = new Sprzeglo("Valeo", "Standard", 500, 10, "Sprzęgło");
+            this.pozycja = new Pozycja(0, 0);
 
         } else if (waga < 1600) {
             // Średnie auto (np. Polonez)
             // Średni silnik (6000 obrotów), skrzynia 5-biegowa
             this.silnik = new Silnik("FSO", "R4", 3000, 150, "Silnik 1.6", 6000);
             this.skrzynia = new SkrzyniaBiegow("FSO", "Manual", 1000, 50, "Skrzynia 5B", 5);
-
+            this.sprzeglo = new Sprzeglo("Valeo", "Standard", 500, 10, "Sprzęgło");
+            this.pozycja = new Pozycja(0, 0);
         } else {
             // Ciężkie/Sportowe auto
             // Mocny silnik (7500 obrotów), skrzynia 6-biegowa
             this.silnik = new Silnik("V8", "Turbo", 10000, 300, "Monster V8", 7500);
             this.skrzynia = new SkrzyniaBiegow("ZF", "Sport", 3000, 80, "Skrzynia 6B", 6);
+            this.sprzeglo = new Sprzeglo("Valeo", "Standard", 500, 10, "Sprzęgło");
+            this.pozycja = new Pozycja(0, 0);
         }
-        this.sprzeglo = new Sprzeglo("Valeo", "Standard", 500, 10, "Sprzęgło");
-        this.pozycja = new Pozycja(0, 0);
+
     }
 
     public Silnik getSilnik() {

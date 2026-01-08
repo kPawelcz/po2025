@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.samochodgui.DodajSamochodController">
 
@@ -50,7 +51,10 @@
         <!-- Wiersz 2: Waga -->
         <Label text="Waga (kg):" GridPane.rowIndex="2" />
         <TextField fx:id="inputWaga" promptText="np. 600" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        
+
+        <Label text="Sprzegło:" GridPane.rowIndex="4"/>
+        <ComboBox fx:id="cmbSprzeglo" prefWidth="150.0" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+
     </GridPane>
 
     <!-- Przyciski na dole -->

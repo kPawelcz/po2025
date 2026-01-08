@@ -2,6 +2,7 @@ package org.example.samochodgui;
 
 import Symulator.Pozycja;
 import Symulator.SkrzyniaBiegow;
+import Symulator.Sprzeglo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +25,7 @@ public class SamochodController {
 
     private Samochod mojSamochod;
     private List<Samochod> listaSamochodow = new ArrayList<>();
+
     private SkrzyniaBiegow skrzynia;
     public Button startButton;
     public Button endButton;
@@ -107,6 +109,8 @@ public class SamochodController {
             // Ustawiamy domyślną wartość w ComboBoxie
             cmbSamochod.setValue(fiat.getModel());
         }
+
+
 
         Thread refreshThread = new Thread(() -> {
             while (true) {
